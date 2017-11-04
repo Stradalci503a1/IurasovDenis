@@ -122,21 +122,21 @@ public class calculator {
             return false;
         }
 
-        int bracketsDelta = 0;
+        int counter = 0;
         for (int i = 0; i < expression.length(); i++) {
 
             char currentChar = expression.charAt(i);
             if (currentChar == '(') {
 
-                bracketsDelta++;
+                counter++;
 
             } else if (currentChar == ')') {
 
-                if (bracketsDelta < 1){
+                if (counter < 1){
 
                     return false;
                 }
-                bracketsDelta--;
+                counter--;
 
             } else if (currentChar != ' ' && !isOperator(currentChar) && !Character.isDigit(currentChar)) {
 
@@ -144,7 +144,7 @@ public class calculator {
             }
         }
 
-        if (bracketsDelta > 0) {
+        if (counter > 0) {
             return false;
         }
 
