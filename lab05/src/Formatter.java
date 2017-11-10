@@ -6,10 +6,11 @@ public class Formatter {
         }
 
         StringBuilder formatedString = new StringBuilder().append(formatString);
-        for(int i = 0;; i++){
+        for(int i = 0;;){
 
             int openingBracketPosition = formatedString.indexOf("{", i);
-            int closingBracketPosition = formatedString.indexOf("}", i);
+            int closingBracketPosition = formatedString.indexOf("}", openingBracketPosition);
+            
             if (openingBracketPosition < 0 || closingBracketPosition < 0){
                 break;
             }
@@ -19,15 +20,12 @@ public class Formatter {
                 formatedString.replace(openingBracketPosition, closingBracketPosition + 1, String.valueOf(arguments[number]));
             }
             catch (NumberFormatException e){
-                i = Math.max(openingBracketPosition, closingBracketPosition);
+                i = closingBracketPosition + 1;
             }
             catch (ArrayIndexOutOfBoundsException e){
                 return null;
             }
         }
-        /*for (int i = 0; i < arguments.length ; i++) {
-            //output = output.replace("{" + i + "}", String.valueOf(arguments[i]));
-        }*/
 
         return formatedString.toString();
     }
