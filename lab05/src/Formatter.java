@@ -20,7 +20,7 @@ public class Formatter {
                 formatedString.replace(openingBracketPosition, closingBracketPosition + 1, String.valueOf(arguments[number]));
             }
             catch (NumberFormatException e){
-                i = closingBracketPosition + 1;
+                i = openingBracketPosition + 1;
             }
             catch (ArrayIndexOutOfBoundsException e){
                 return null;
