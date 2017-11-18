@@ -17,7 +17,7 @@ public class Formatter {
 
             try{
                 int number = Integer.parseInt(formatedString.substring(openingBracketPosition + 1, closingBracketPosition));
-                formatedString.replace(openingBracketPosition, closingBracketPosition + 1, String.valueOf(arguments[number]));
+                formatedString.replace(openingBracketPosition, closingBracketPosition + 1, arguments[number].toString());
             }
             catch (NumberFormatException e){
                 i = openingBracketPosition + 1;
