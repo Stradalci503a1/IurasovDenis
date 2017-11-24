@@ -1,6 +1,3 @@
-//Letters - "[a-zA-Zа-яА-Я]"
-//Words - "([^A-Za-zА-Яа-я])([\\s\\W]+)"
-
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
