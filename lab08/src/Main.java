@@ -10,5 +10,14 @@ public class Main {
         finally {
             System.out.println(locker.get());
         }
+        locker.unlock();
+        try {
+            locker.set(1);
+        } catch (LockerLockedException e) {
+            System.out.println(e.toString());
+        }
+        finally {
+            System.out.println(locker.get());
+        }
     }
 }
