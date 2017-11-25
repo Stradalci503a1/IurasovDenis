@@ -10,11 +10,6 @@ public class Locker {
         this.value = value;
     }
 
-    public Locker (int value, boolean locked){
-        this.value = value;
-        this.locked = locked;
-    }
-
     public void set(int value) throws LockerLockedException {
         if (this.locked){
             throw new LockerLockedException();
