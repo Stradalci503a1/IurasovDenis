@@ -71,7 +71,7 @@ public class LinkedListTests {
         assertEquals(10, list.length());
 
 
-        //Processing
+
         //First
         list.removeFirst();
         assertEquals(1, list.first().id);
@@ -108,7 +108,6 @@ public class LinkedListTests {
         assertEquals(10, list.length());
 
 
-        //Processing
         //Find
         assertNull(list.find(-1));
         assertNull(list.find(112));
