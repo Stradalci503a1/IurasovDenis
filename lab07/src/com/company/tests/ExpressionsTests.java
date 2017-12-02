@@ -10,21 +10,30 @@ public class ExpressionsTests {
 
     @Test
     public void value(){
-        assertEquals(5, Value.valueOf(5), 0.001);
 
-        assertEquals(5235, Value.valueOf(5235L), 0.001);
+        Expression value = new Value(5);
+        assertEquals(5, value.calculate(), 0.001);
 
-        assertEquals(53.4, Value.valueOf(53.4), 0.0001);
+        value = new Value(5235L);
+        assertEquals(5235, value.calculate(), 0.001);
 
-        assertEquals(56.2, Value.valueOf(56.2F), 0.0001);
+        value = new Value(53.4);
+        assertEquals(53.4, value.calculate(), 0.0001);
 
-        assertEquals(21, Value.valueOf((byte)21), 0.001);
+        value = new Value(56.2F);
+        assertEquals(56.2, value.calculate(), 0.0001);
 
-        assertEquals(21657,  Value.valueOf((short)21657), 0.001);
+        value = new Value((byte)21);
+        assertEquals(21, value.calculate(), 0.001);
 
-        assertEquals(654, Value.valueOf("654"), 0.001);
+        value = new Value((short)21657);
+        assertEquals(21657,  value.calculate(), 0.001);
 
-        assertEquals(Double.NaN, Value.valueOf("436dgs4"));
+        value = new Value("654");
+        assertEquals(654, value.calculate(), 0.001);
+
+        value = new Value("436dgs4");
+        assertEquals(Double.NaN, value.calculate());
     }
 
     @Test
@@ -52,6 +61,9 @@ public class ExpressionsTests {
 
         addition = new Addition(5, "2", 0.1F, 3.4);
         assertEquals(10.5, addition.calculate(), 0.0001);
+
+        addition = new Addition(2.5);
+        assertEquals(2.5, addition.calculate(), 0.0001);
     }
 
     @Test
@@ -61,6 +73,9 @@ public class ExpressionsTests {
 
         multiplication = new Multiplication(5, "2", 0.1F, 3.4);
         assertEquals(3.4, multiplication.calculate(), 0.0001);
+
+        multiplication = new Multiplication(7);
+        assertEquals(7, multiplication.calculate(), 0.001);
     }
 
     @Test

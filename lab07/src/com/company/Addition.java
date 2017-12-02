@@ -2,18 +2,22 @@ package com.company;
 
 public class Addition extends BinaryExpression implements Expression{
 
-    public Addition(Object firstValue, Object secondValue, Object... additionalValues){
-        super(Value.valueOf(firstValue), Value.valueOf(secondValue));
+    public Addition(Object firstValue, Object... additionalValues){
+        super(new Value(firstValue), new Value(0));
 
-        double previousSum = this.secondValue;
-        for (Object element : additionalValues){
-            previousSum += Value.valueOf(element);
+        Expression sum = getSecondValue();
+        if (additionalValues.length == 1){
+            sum = new Addition(additionalValues[0]);
+        } else {
+            for (Object element : additionalValues) {
+                sum = new Addition(element, sum);
+            }
         }
-        this.secondValue = previousSum;
+        setSecondValue(sum);
     }
 
     @Override
     public double calculate() {
-        return firstValue + secondValue;
+        return getFirstValue().calculate() + getSecondValue().calculate();
     }
 }

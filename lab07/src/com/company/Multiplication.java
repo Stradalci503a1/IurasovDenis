@@ -2,18 +2,22 @@ package com.company;
 
 public class Multiplication extends BinaryExpression implements Expression{
 
-    public Multiplication(Object firstValue, Object secondValue, Object... additionalValues){
-        super(Value.valueOf(firstValue), Value.valueOf(secondValue));
+    public Multiplication(Object firstValue, Object... additionalValues){
+        super(new Value(firstValue), new Value(1));
 
-        double previousSum = this.secondValue;
-        for (Object element : additionalValues){
-            previousSum *= Value.valueOf(element);
+        Expression product = getSecondValue();
+        if (additionalValues.length == 1) {
+            product = new Multiplication(additionalValues[0]);
+        } else {
+            for (Object element : additionalValues) {
+                product = new Multiplication(element, product);
+            }
         }
-        this.secondValue = previousSum;
+        setSecondValue(product);
     }
 
     @Override
     public double calculate() {
-        return firstValue * secondValue;
+        return getFirstValue().calculate() * getSecondValue().calculate();
     }
 }

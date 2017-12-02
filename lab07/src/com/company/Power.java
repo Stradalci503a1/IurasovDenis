@@ -3,20 +3,23 @@ package com.company;
 public class Power extends BinaryExpression implements Expression{
 
     public Power(Object firstValue, Object secondValue){
-        super(Value.valueOf(firstValue), Value.valueOf(secondValue));
+        super(new Value(firstValue), new Value(secondValue));
     }
 
     @Override
     public double calculate() {
 
-        if (firstValue >= 0 || secondValue < 0 || secondValue > 1) {
-            return Math.pow(firstValue, secondValue);
+        double value = getFirstValue().calculate();
+        double power = getSecondValue().calculate();
 
-        } else if (Math.pow(secondValue, -1.0) % 2 == 0) {
+        if (value >= 0 || power < 0 || power > 1) {
+            return Math.pow(value, power);
+
+        } else if (Math.pow(power, -1.0) % 2 == 0) {
             return Double.NaN;
 
         } else {
-            return -Math.pow(Math.abs(firstValue), secondValue);
+            return -Math.pow(Math.abs(value), power);
         }
     }
 }

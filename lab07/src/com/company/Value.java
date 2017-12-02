@@ -1,32 +1,32 @@
 package com.company;
 
-public class Value{
+public class Value implements Expression{
 
-    public static double valueOf(Object value) throws NumberFormatException {
-        switch (value.getClass().getName()){
-            case "java.lang.Byte":
-            case "java.lang.Short":
-            case "java.lang.Integer":
-            case "java.lang.Long":
-            case "java.lang.Float":
-                return Double.valueOf(value.toString());
-            case "java.lang.Double":
-                return (double)value;
-            case "java.lang.String":
-                try
-                {
-                    return Double.valueOf((String) value);
-                }
-                catch (NumberFormatException exception){
-                    return Double.NaN;
-                }
-            default:
-                for (Class interfaces : value.getClass().getInterfaces()) {
-                    if (interfaces.getName() == "com.company.Expression"){
-                        return ((Expression)value).calculate();
-                    }
-                }
-                return Double.NaN;
+    private double value;
+
+    public Value(Object value) {
+
+        if (value instanceof Byte || value instanceof Short || value instanceof Integer
+                || value instanceof Long || value instanceof Float) {
+
+            this.value = Double.valueOf(value.toString());
+        } else if (value instanceof Double) {
+            this.value = (double)value;
+        } else if (value instanceof String) {
+            try {
+                    this.value = Double.valueOf((String) value);
+            } catch (NumberFormatException exception) {
+                this.value = Double.NaN;
+            }
+        } else if (value instanceof Expression) {
+            this.value = ((Expression)value).calculate();
+        } else {
+            this.value = Double.NaN;
         }
+    }
+
+    @Override
+    public double calculate() {
+        return value;
     }
 }
