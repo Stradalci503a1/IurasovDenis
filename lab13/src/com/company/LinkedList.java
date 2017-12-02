@@ -281,12 +281,30 @@ public class LinkedList<TType> implements Iterable<TType>, ILinkedList<TType>, C
 
     @Override
     public boolean all(Predicate<TType> predicate){
-        return count(predicate) == length;
+        
+        for (TType element : this) {
+            try {
+                if (!predicate.test(element)){
+                    return false;
+                }
+            } catch (Throwable t) {
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean any(Predicate<TType> predicate) {
-        return count(predicate) != 0;
+        
+        for (TType element : this) {
+            try {
+                if (predicate.test(element)){
+                    return true;
+                }
+            } catch (Throwable t) {
+            }
+        }
+        return false;
     }
 
     @Override
