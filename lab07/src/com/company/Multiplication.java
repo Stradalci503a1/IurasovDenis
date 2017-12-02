@@ -2,8 +2,8 @@ package com.company;
 
 public class Multiplication extends BinaryExpression implements Expression{
 
-    public Multiplication(Expression firstValue, Expression secondValue){
-        super(firstValue, secondValue);
+    public Multiplication(Object firstValue, Object secondValue){
+        super(new Value(firstValue), new Value(secondValue));
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.company;
 
 public class Substraction extends BinaryExpression implements Expression{
 
-    public Substraction(Expression firstValue, Expression secondValue){
-        super(firstValue, secondValue);
+    public Substraction(Object firstValue, Object secondValue){
+        super(new Value(firstValue), new Value(secondValue));
     }
 
     @Override

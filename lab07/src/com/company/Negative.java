@@ -2,8 +2,8 @@ package com.company;
 
 public class Negative extends UnaryExpression implements Expression{
 
-    public Negative(Expression value){
-        super(value);
+    public Negative(Object value){
+        super(new Value(value));
     }
 
     @Override

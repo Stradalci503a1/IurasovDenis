@@ -2,8 +2,8 @@ package com.company;
 
 public class Rest extends BinaryExpression implements Expression{
 
-    public Rest(Expression firstValue, Expression secondValue){
-        super(firstValue, secondValue);
+    public Rest(Object firstValue, Object secondValue){
+        super(new Value(firstValue), new Value(secondValue));
     }
 
     @Override

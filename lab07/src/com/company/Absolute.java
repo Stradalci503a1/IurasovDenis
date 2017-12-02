@@ -2,8 +2,8 @@ package com.company;
 
 public class Absolute extends UnaryExpression implements Expression{
 
-    public Absolute(Expression value){
-        super(value);
+    public Absolute(Object value){
+        super(new Value(value));
     }
 
     @Override

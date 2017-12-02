@@ -2,8 +2,8 @@ package com.company;
 
 public class Power extends BinaryExpression implements Expression{
 
-    public Power(Expression firstValue, Expression secondValue){
-        super(firstValue, secondValue);
+    public Power(Object firstValue, Object secondValue){
+        super(new Value(firstValue), new Value(secondValue));
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.company;
 
 public class Addition extends BinaryExpression implements Expression{
 
-    public Addition(Expression firstValue, Expression secondValue){
-        super(firstValue, secondValue);
+    public Addition(Object firstValue, Object secondValue){
+        super(new Value(firstValue), new Value(secondValue));
     }
 
     @Override

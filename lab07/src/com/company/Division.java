@@ -2,8 +2,8 @@ package com.company;
 
 public class Division extends BinaryExpression implements Expression{
 
-    public Division(Expression firstValue, Expression secondValue){
-        super(firstValue, secondValue);
+    public Division(Object firstValue, Object secondValue){
+        super(new Value(firstValue), new Value(secondValue));
     }
 
     @Override

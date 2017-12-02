@@ -37,43 +37,43 @@ public class ExpressionsTests {
 
     @Test
     public void absolute(){
-        Expression absolute = new Absolute(new Value(-7));
+        Expression absolute = new Absolute(-7);
         assertEquals(7, absolute.calculate());
     }
 
     @Test
     public void negative(){
-        Expression negative = new Negative(new Value(-4));
+        Expression negative = new Negative(-4);
         assertEquals(4, negative.calculate());
     }
 
     @Test
     public void square(){
-        Expression square = new Square(new Value(3));
+        Expression square = new Square(3);
         assertEquals(9, square.calculate());
     }
 
     @Test
     public void addition(){
-        Expression addition = new Addition(new Value(3), new Value(8));
+        Expression addition = new Addition(3, 8);
         assertEquals(11, addition.calculate());
     }
 
     @Test
     public void multiplication(){
-        Expression multiplication = new Multiplication(new Value(-5), new Value(2));
+        Expression multiplication = new Multiplication(-5, 2);
         assertEquals(-10, multiplication.calculate());
     }
 
     @Test
     public void substraction() {
-        Expression substraction = new Substraction(new Value(-2), new Value(7));
+        Expression substraction = new Substraction(-2 , 7);
         assertEquals(-9, substraction.calculate());
     }
 
     @Test
     public void division() {
-        Expression division = new Division(new Value(6), new Value(3));
+        Expression division = new Division(6, 3);
         assertEquals(2, division.calculate());
 
         division = new Division(new Value(3), new Value(0));
@@ -82,22 +82,22 @@ public class ExpressionsTests {
 
     @Test
     public void power() {
-        Expression power = new Power(new Value(3), new Value(4));
+        Expression power = new Power(3, 4);
         assertEquals(81, power.calculate());
 
-        power = new Power(new Value(-5), new Value(1.0/2.0));
+        power = new Power(-5, 1.0/2.0);
         assertEquals(Double.NaN, power.calculate());
 
-        power = new Power(new Value(-8), new Value(1.0/3.0));
+        power = new Power(-8, 1.0/3.0);
         assertEquals(-2, power.calculate());
     }
 
     @Test
     public void rest() {
-        Expression rest = new Rest(new Value(5), new Value(2));
+        Expression rest = new Rest(5, 2);
         assertEquals(1, rest.calculate());
 
-        rest = new Rest(new Value(6), new Value(0));
+        rest = new Rest(6, 0);
         assertEquals(Double.NaN, rest.calculate());
     }
 
@@ -105,21 +105,14 @@ public class ExpressionsTests {
     public void mathExpression(){
         //Mathematical expression: 5^3 + 2 * (-4) - 3 / (2^2 % |-3|)
         Expression expression = new Addition(
-                                    new Power(
-                                            new Value(5),
-                                            new Value(3)),
+                                    new Power(5, 3),
                                     new Substraction(
-                                            new Multiplication(
-                                                    new Value(2),
-                                                    new Negative(
-                                                            new Value(4))),
-                                            new Division(
-                                                    new Value(3),
+                                            new Multiplication(2,
+                                                    new Negative(4)),
+                                            new Division(3,
                                                     new Rest(
-                                                            new Square(
-                                                                    new Value(2)),
-                                                            new Absolute(
-                                                                    new Value(-3))))));
+                                                            new Square(2),
+                                                            new Absolute(-3)))));
         assertEquals(114, expression.calculate());
     }
 }

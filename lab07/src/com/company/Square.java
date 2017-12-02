@@ -2,8 +2,8 @@ package com.company;
 
 public class Square extends UnaryExpression implements Expression{
 
-    public Square(Expression value){
-        super(value);
+    public Square(Object value){
+        super(new Value(value));
     }
 
     @Override
