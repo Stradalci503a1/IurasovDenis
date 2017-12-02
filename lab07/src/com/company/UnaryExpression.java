@@ -2,9 +2,9 @@ package com.company;
 
 public abstract class UnaryExpression {
 
-    Expression value;
+    double value;
 
-    public UnaryExpression(Expression value){
+    public UnaryExpression(double value){
         this.value = value;
     }
 

@@ -2,10 +2,10 @@ package com.company;
 
 public abstract class BinaryExpression {
 
-    Expression firstValue;
-    Expression secondValue;
+    double firstValue;
+    double secondValue;
 
-    public BinaryExpression(Expression firstValue, Expression secondValue){
+    public BinaryExpression(double firstValue, double secondValue){
         this.firstValue = firstValue;
         this.secondValue = secondValue;
     }
