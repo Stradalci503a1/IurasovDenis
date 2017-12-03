@@ -8,11 +8,11 @@ public abstract class UnaryExpression {
         this.value = value;
     }
 
-    public Expression getValue() {
+    public Expression value() {
         return value;
     }
 
-    public void setValue(Expression value) {
+    public void value(Expression value) {
         this.value = value;
     }
 }

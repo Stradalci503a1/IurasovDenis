@@ -10,19 +10,34 @@ public abstract class BinaryExpression {
         this.secondValue = secondValue;
     }
 
-    public Expression getFirstValue() {
+    public Expression firstValue() {
         return firstValue;
     }
 
-    public Expression getSecondValue() {
+    public void firstValue(Expression value) {
+        firstValue = value;
+    }
+
+    public Expression secondValue() {
         return secondValue;
     }
 
-    public void setFirstValue(Expression firstValue) {
-        this.firstValue = firstValue;
+    public void secondValue(Expression value) {
+        secondValue = value;
     }
-
-    public void setSecondValue(Expression secondValue) {
-        this.secondValue = secondValue;
-    }
+//    public Expression getFirstValue() {
+//        return firstValue;
+//    }
+//
+//    public Expression getSecondValue() {
+//        return secondValue;
+//    }
+//
+//    public void setFirstValue(Expression firstValue) {
+//        this.firstValue = firstValue;
+//    }
+//
+//    public void setSecondValue(Expression secondValue) {
+//        this.secondValue = secondValue;
+//    }
 }

@@ -2,10 +2,11 @@ package com.company;
 
 public class Addition extends BinaryExpression implements Expression{
 
+    private Double value;
+
     public Addition(Object firstValue, Object... additionalValues){
         super(new Value(firstValue), new Value(0));
-
-        Expression sum = getSecondValue();
+        Expression sum = secondValue();
         if (additionalValues.length == 1){
             sum = new Addition(additionalValues[0]);
         } else {
@@ -13,11 +14,15 @@ public class Addition extends BinaryExpression implements Expression{
                 sum = new Addition(element, sum);
             }
         }
-        setSecondValue(sum);
+        secondValue(sum);
     }
 
     @Override
     public double calculate() {
-        return getFirstValue().calculate() + getSecondValue().calculate();
+        if (value == null) {
+            value = firstValue().calculate() + secondValue().calculate();
+        }
+
+        return value;
     }
 }

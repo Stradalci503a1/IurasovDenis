@@ -2,12 +2,18 @@ package com.company;
 
 public class Absolute extends UnaryExpression implements Expression{
 
+    private Double value;
+
     public Absolute(Object value){
         super(new Value(value));
     }
 
     @Override
     public double calculate() {
-        return Math.abs(getValue().calculate());
+        if (value == null){
+            value = Math.abs(value().calculate());
+        }
+
+        return value;
     }
 }
