@@ -1,13 +1,17 @@
 package com.company.Base;
 
-public abstract class BinaryExpression extends Expression {
+import java.util.function.Supplier;
+
+public abstract class BinaryExpression {
 
     private IExpression firstValue;
     private IExpression secondValue;
+    protected CacheResult cache;
 
     public BinaryExpression(IExpression firstValue, IExpression secondValue){
         this.firstValue = firstValue;
         this.secondValue = secondValue;
+        cache = new CacheResult((IExpression) this);
     }
 
     public IExpression firstValue() {
@@ -25,19 +29,8 @@ public abstract class BinaryExpression extends Expression {
     public void secondValue(IExpression value) {
         secondValue = value;
     }
-//    public IExpression getFirstValue() {
-//        return firstValue;
-//    }
-//
-//    public IExpression getSecondValue() {
-//        return secondValue;
-//    }
-//
-//    public void setFirstValue(IExpression firstValue) {
-//        this.firstValue = firstValue;
-//    }
-//
-//    public void setSecondValue(IExpression secondValue) {
-//        this.secondValue = secondValue;
-//    }
+
+    public boolean equals(BinaryExpression expression) {
+        return firstValue.calculate() == expression.firstValue.calculate() && secondValue.calculate() == expression.secondValue.calculate();
+    }
 }

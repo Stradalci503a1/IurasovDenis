@@ -12,6 +12,6 @@ public class Rest extends BinaryExpression implements IExpression {
 
     @Override
     public double calculate() {
-        return result(0 == secondValue().calculate() ? Double.NaN : firstValue().calculate() % secondValue().calculate());
+        return 0 == secondValue().calculate() ? Double.NaN : firstValue().calculate() % secondValue().calculate();
     }
 }

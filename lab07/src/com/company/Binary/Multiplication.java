@@ -22,6 +22,6 @@ public class Multiplication extends BinaryExpression implements IExpression {
 
     @Override
     public double calculate() {
-        return result(firstValue().calculate() * secondValue().calculate());
+        return firstValue().calculate() * secondValue().calculate();
     }
 }

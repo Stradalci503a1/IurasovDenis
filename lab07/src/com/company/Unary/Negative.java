@@ -12,6 +12,6 @@ public class Negative extends UnaryExpression implements IExpression {
 
     @Override
     public double calculate() {
-        return result(-value().calculate());
+        return -value().calculate();
     }
 }
