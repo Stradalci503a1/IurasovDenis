@@ -12,10 +12,10 @@ public class Power extends BinaryExpression implements IExpression {
 
     @Override
     public double calculate() {
-        return firstValue().calculate() >= 0 || secondValue().calculate() < 0 || secondValue().calculate() > 1 ?
+        return cache(() -> firstValue().calculate() >= 0 || secondValue().calculate() < 0 || secondValue().calculate() > 1 ?
                     Math.pow(firstValue().calculate(), secondValue().calculate()) :
                     Math.pow (secondValue().calculate(), -1) % 2 == 0 ?
                         Double.NaN :
-                        -Math.pow(Math.abs(firstValue().calculate()), secondValue().calculate());
+                        -Math.pow(Math.abs(firstValue().calculate()), secondValue().calculate()));
     }
 }

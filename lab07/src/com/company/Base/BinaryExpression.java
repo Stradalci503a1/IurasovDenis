@@ -30,7 +30,7 @@ public abstract class BinaryExpression {
         secondValue = value;
     }
 
-    public boolean equals(BinaryExpression expression) {
-        return firstValue.calculate() == expression.firstValue.calculate() && secondValue.calculate() == expression.secondValue.calculate();
+    protected double cache(Supplier expression) {
+        return cache.getCache(expression);
     }
 }

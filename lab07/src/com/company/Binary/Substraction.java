@@ -12,6 +12,6 @@ public class Substraction extends BinaryExpression implements IExpression {
 
     @Override
     public double calculate() {
-        return firstValue().calculate() - secondValue().calculate();
+        return cache(() -> firstValue().calculate() - secondValue().calculate());
     }
 }

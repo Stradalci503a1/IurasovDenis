@@ -1,5 +1,7 @@
 package com.company.Base;
 
+import java.util.function.Supplier;
+
 public abstract class UnaryExpression {
 
     private IExpression value;
@@ -18,7 +20,7 @@ public abstract class UnaryExpression {
         this.value = value;
     }
 
-    public boolean equals(UnaryExpression expression) {
-        return value.calculate() == expression.value.calculate();
+    protected double cache(Supplier expression) {
+        return cache.getCache(expression);
     }
 }

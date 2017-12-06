@@ -12,6 +12,6 @@ public class Square extends UnaryExpression implements IExpression {
 
     @Override
     public double calculate() {
-        return value().calculate() * value().calculate();
+        return cache(() -> value().calculate() * value().calculate());
     }
 }

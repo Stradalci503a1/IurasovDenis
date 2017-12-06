@@ -1,8 +1,9 @@
 package com.company.Base;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
-class CacheResult implements IExpression{
+class CacheResult{
 
     private static ArrayList<Container> cache = new ArrayList<>();
 
@@ -22,9 +23,8 @@ class CacheResult implements IExpression{
         }
     }
 
-    @Override
-    public double calculate() {
-        return container.calculate();
+    protected double getCache(Supplier<Double> expression) {
+        return container.calculate(expression);
     }
 
     private class Container{
@@ -36,10 +36,11 @@ class CacheResult implements IExpression{
             this.expression = expression;
         }
 
-        private double calculate() {
+        private double calculate(Supplier<Double> expression) {
             if (null == result) {
-                result = expression.calculate();
+                result = expression.get();
             }
+
             return result;
         }
     }

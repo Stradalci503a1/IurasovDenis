@@ -132,4 +132,28 @@ public class ExpressionsTests {
                                                             new Absolute(-3)))));
         assertEquals(114, IExpression.calculate(), 0.001);
     }
+
+    //Average time with cache 1.2, without 2,2 in my PC
+    @Test
+    public void useCache() {
+        IExpression expression = new Addition(
+                new Substraction(
+                        new Multiplication(2,
+                                new Negative(4)),
+                        new Division(3,
+                                new Rest(
+                                        new Square(2),
+                                        new Power(5, 3)))),
+                new Substraction(
+                        new Multiplication(2,
+                                new Negative(4)),
+                        new Division(3,
+                                new Rest(
+                                        new Square(2),
+                                        new Absolute(-3)))));
+
+        for (int i = 0; i < 1000000000; i++) {
+            expression.calculate();
+        }
+    }
 }

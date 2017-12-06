@@ -12,6 +12,6 @@ public class Absolute extends UnaryExpression implements IExpression {
 
     @Override
     public double calculate() {
-        return Math.abs(value().calculate());
+        return cache(() -> Math.abs(value().calculate()));
     }
 }

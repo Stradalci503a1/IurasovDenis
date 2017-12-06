@@ -20,7 +20,7 @@ public abstract class Utils {
             return equals(((UnaryExpression) firstExpression).value(), ((UnaryExpression)secondExpression).value());
 
         } else if (firstExpression instanceof Value){
-            return ((Value)firstExpression).calculate() == ((Value)secondExpression).calculate();
+            return (firstExpression).calculate() == (secondExpression).calculate();
 
         } else {
             return false;
