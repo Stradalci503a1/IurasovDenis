@@ -3,7 +3,7 @@ package com.company;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class DeepCompare implements IDeepCompare{
+public class DeepCompare implements IDeepCompare {
 
     ArrayList metObjects = new ArrayList();
 
@@ -19,51 +19,59 @@ public class DeepCompare implements IDeepCompare{
             return false;
         }
 
-        Object left1 = left;
-        Object right1 = right;
+        Object leftObject = left;
+        Object rightObject = right;
         if (left instanceof Byte) {
-            return (Byte)left1 == (Byte)right1;
+            return (Byte) leftObject == (Byte) rightObject;
         } else if (left instanceof Short) {
-            return (Short)left1 == (Short)right1;
+            return (Short) leftObject == (Short) rightObject;
         } else if (left instanceof Integer) {
-            return (int)left1 == (int)right1;
+            return (int) leftObject == (int) rightObject;
         } else if (left instanceof Long) {
-            return (long)left1 == (long)right1;
+            return (long) leftObject == (long) rightObject;
         } else if (left instanceof Float) {
-            return (float)left1 == (float)right1;
+            return (float) leftObject == (float) rightObject;
         } else if (left instanceof Double) {
-            return (double)left1 == (double)right1;
+            return (double) leftObject == (double) rightObject;
         } else if (left instanceof Boolean) {
-            return (boolean)left1 == (boolean)right1;
+            return (boolean) leftObject == (boolean) rightObject;
         } else if (left instanceof Character) {
-            return (char)left1 == (char)right1;
+            return (char) leftObject == (char) rightObject;
         }
 
-        if (null == left || null == right){
+        if (null == left || null == right) {
             return false;
         }
 
         metObjects.add(left);
         metObjects.add(right);
 
-        for (Field field : left.getClass().getDeclaredFields()) {
+        if (left.getClass().isArray()) {
 
-            try {
-                field.setAccessible(true);
-                if (!isEqual(field.get(left), field.get(right))) {
-                    metObjects.remove(left);
-                    metObjects.remove(right);
+            //arrayEquals(left);
+        } else {
+            for (Field field : left.getClass().getDeclaredFields()) {
 
-                    return false;
+                try {
+                    field.setAccessible(true);
+                    if (!isEqual(field.get(left), field.get(right))) {
+                        metObjects.remove(left);
+                        metObjects.remove(right);
+
+                        return false;
+                    }
+
+                } catch (Exception e) {
                 }
-
-            } catch (Exception e) {
             }
         }
-
         metObjects.remove(left);
         metObjects.remove(right);
 
+        return true;
+    }
+
+    private boolean arrayEquals(Object[] a) {
         return true;
     }
 }
