@@ -107,6 +107,9 @@ public class ExpressionsTests {
 
         power = new Power(-8, 1.0/3.0);
         assertEquals(-2, power.calculate(), 0.001);
+
+        power = new Power(-8, 5.0 / 3);
+        assertEquals(-32.0 , power.calculate(), 0.001);
     }
 
     @Test

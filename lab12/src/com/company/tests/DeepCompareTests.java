@@ -52,9 +52,10 @@ public class DeepCompareTests {
 
         IDeepCompare compare = new DeepCompare();
 
-        PublicFields<String> firstObject = new PublicFields<>("Test");
-        PublicFields<String> secondObject = new PublicFields<>("Test");
-        PublicFields<String> thirdObject = new PublicFields<>("cgsd");
+        int i = 1;
+        PublicFields<String> firstObject = new PublicFields<>("Test" + i);
+        PublicFields<String> secondObject = new PublicFields<>("Test" + i);
+        PublicFields<String> thirdObject = new PublicFields<>("4");
 
         Assertions.assertTrue(compare.isEqual(firstObject, secondObject));
         Assertions.assertFalse(compare.isEqual(firstObject, thirdObject));

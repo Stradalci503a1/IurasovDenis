@@ -1,26 +1,26 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class DeepCompare implements IDeepCompare {
+public class DeepCompare implements IDeepCompare{
 
     ArrayList metObjects = new ArrayList();
 
     @Override
     public <TObject> boolean isEqual(TObject left, TObject right) {
-
         if (left == right) {
             return true;
         }
 
         if (-1 < metObjects.indexOf(left) || -1 < metObjects.indexOf(right)) {
-            System.out.println("Cyclical");
             return false;
         }
 
         Object leftObject = left;
         Object rightObject = right;
+
         if (left instanceof Byte) {
             return (Byte) leftObject == (Byte) rightObject;
         } else if (left instanceof Short) {
@@ -48,30 +48,37 @@ public class DeepCompare implements IDeepCompare {
 
         if (left.getClass().isArray()) {
 
-            //arrayEquals(left);
+            if (Array.getLength(left) != Array.getLength(right)) {
+                remove(left, right);
+                return false;
+            }
+            for (int i = 0; i < Array.getLength(left); i++) {
+                if (!isEqual(Array.get(left, i), Array.get(right, i))) {
+                    remove(left, right);
+                    return false;
+                }
+            }
         } else {
             for (Field field : left.getClass().getDeclaredFields()) {
 
                 try {
                     field.setAccessible(true);
                     if (!isEqual(field.get(left), field.get(right))) {
-                        metObjects.remove(left);
-                        metObjects.remove(right);
-
+                        remove(left, right);
                         return false;
                     }
 
-                } catch (Exception e) {
+                } catch (IllegalAccessException e) {
                 }
             }
         }
-        metObjects.remove(left);
-        metObjects.remove(right);
+        remove(left, right);
 
         return true;
     }
 
-    private boolean arrayEquals(Object[] a) {
-        return true;
+    private void remove(Object left, Object right) {
+        metObjects.remove(left);
+        metObjects.remove(right);
     }
 }
