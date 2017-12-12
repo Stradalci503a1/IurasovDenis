@@ -7,57 +7,62 @@ import org.junit.jupiter.api.Test;
 
 public class DeepCompareTests {
 
+    private IDeepCompare comparator = new DeepCompare();
 
     @Test
     public void nullPointer() {
-
-        IDeepCompare compare = new DeepCompare();
 
         PublicFields<Integer> firstObject = null;
         PublicFields<Integer> secondObject = null;
         PublicFields<Integer> thirdObject = new PublicFields<>(6);
 
-        Assertions.assertTrue(compare.isEqual(firstObject, secondObject));
-        Assertions.assertFalse(compare.isEqual(firstObject, thirdObject));
+        Assertions.assertTrue(comparator.isEqual(firstObject, secondObject));
+        Assertions.assertFalse(comparator.isEqual(firstObject, thirdObject));
     }
 
     @Test
     public void privateFields() {
 
-        IDeepCompare compare = new DeepCompare();
-
         PrivateFields firstObject = new PrivateFields(34, 'a');
         PrivateFields secondObject = new PrivateFields(34, 'a');
         PrivateFields thirdObject = new PrivateFields(15, 'a');
 
-        Assertions.assertTrue(compare.isEqual(firstObject, secondObject));
-        Assertions.assertFalse(compare.isEqual(firstObject, thirdObject));
+        Assertions.assertTrue(comparator.isEqual(firstObject, secondObject));
+        Assertions.assertFalse(comparator.isEqual(firstObject, thirdObject));
     }
 
     @Test
     public void cyclicLinks() {
-
-        IDeepCompare compare = new DeepCompare();
 
         ToCyclic firstObject = new ToCyclic();
         ToCyclic secondObject = new ToCyclic(firstObject);
         ToCyclic thirdObject = new ToCyclic(secondObject);
         firstObject = secondObject;
 
-        Assertions.assertFalse(compare.isEqual(firstObject, thirdObject));
+        Assertions.assertFalse(comparator.isEqual(firstObject, thirdObject));
     }
 
     @Test
     public void publicFields() {
 
-        IDeepCompare compare = new DeepCompare();
-
         int i = 1;
         PublicFields<String> firstObject = new PublicFields<>("Test" + i);
         PublicFields<String> secondObject = new PublicFields<>("Test" + i);
-        PublicFields<String> thirdObject = new PublicFields<>("4");
+        PublicFields<String> thirdObject = new PublicFields<>("1gdfs");
 
-        Assertions.assertTrue(compare.isEqual(firstObject, secondObject));
-        Assertions.assertFalse(compare.isEqual(firstObject, thirdObject));
+        Assertions.assertTrue(comparator.isEqual(firstObject, secondObject));
+        Assertions.assertFalse(comparator.isEqual(firstObject, thirdObject));
+    }
+
+    @Test
+    public void compareStrings() {
+
+        String left = "Test";
+        StringBuilder right = new StringBuilder("Test");
+
+        Assertions.assertTrue(comparator.isEqual(left, right.toString()));
+
+        right.append("4");
+        Assertions.assertFalse(comparator.isEqual(left, right.toString()));
     }
 }
