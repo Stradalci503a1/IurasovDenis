@@ -57,8 +57,11 @@ public class DeepCompareTests {
     @Test
     public void compareStrings() {
 
-        String left = "Test";
-        StringBuilder right = new StringBuilder("Test");
+        String left = new String();
+        left += "Te";
+        left += "st";
+        StringBuilder right = new StringBuilder();
+        right.append("T").append("es").append("t");
 
         Assertions.assertTrue(comparator.isEqual(left, right.toString()));
 
